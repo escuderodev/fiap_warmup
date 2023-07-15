@@ -37,14 +37,6 @@ public class Curso {
         aulas.add(aula);
     }
 
-//    public int getTempoTotal() {
-//        int tempoTotal = 0;
-//        for (int i = 0; i < aulas.size(); i++) {
-//            tempoTotal += aulas.get(i).getTempo();
-//        }
-//        return tempoTotal;
-//    }
-
     public int getTempoTotal() {
         int tempoTotal = 0;
         for (Aula aula : aulas) {
