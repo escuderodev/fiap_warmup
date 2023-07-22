@@ -1,10 +1,12 @@
 package br.com.escuderodev.loja;
 
-import br.com.escuderodev.loja.models.Produto;
+import br.com.escuderodev.loja.dao.CategoriaDAO;
+import br.com.escuderodev.loja.dao.ProdutoDAO;
+import br.com.escuderodev.loja.models.categoria.Categoria;
+import br.com.escuderodev.loja.models.produto.Produto;
+import br.com.escuderodev.loja.util.JPAUtil;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
@@ -21,20 +23,27 @@ public class App {
         System.out.print("Digite o preço do produto: R$ ");
         BigDecimal preco = scan.nextBigDecimal();
 
-        Produto produto = new Produto(nome, descricao, new BigDecimal(String.valueOf(preco)));
+        System.out.print("Digite a categoria ");
+        String categoriaDigitada = scan.next();
 
+        Categoria categoria = new Categoria(categoriaDigitada);
+        Produto produto = new Produto(nome, descricao, new BigDecimal(String.valueOf(preco)), categoria);
+
+        EntityManager entityManager = JPAUtil.getEntityManager();
+        CategoriaDAO categoriaDAO = new CategoriaDAO(entityManager);
+        ProdutoDAO produtoDAO = new ProdutoDAO(entityManager);
+
+        entityManager.getTransaction().begin();
+        categoriaDAO.cadastrarCategoria(categoria);
+        produtoDAO.cadastrarProduto(produto);
+        entityManager.getTransaction().commit();
+
+        System.out.println("\n");
         System.out.println(String.format("""
                 Produto: %s
                 Descrição: %s
                 Preço R$: %.2f
-                """, produto.getNome(), produto.getDescricao(), produto.getPreco()));
-
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("loja");
-        EntityManager entityManager = factory.createEntityManager();
-
-        entityManager.getTransaction().begin();
-        entityManager.persist(produto);
-        entityManager.getTransaction().commit();
-        entityManager.close();
+                Categoria: %s
+                """, produto.getNome(), produto.getDescricao(), produto.getPreco(), produto.getCategoria().getNomeCategoria()));
     }
 }
