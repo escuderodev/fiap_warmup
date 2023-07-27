@@ -12,10 +12,10 @@ public class TestaCurso2 {
     public static void main(String[] args) {
         Curso formacaoJavaJunior = new Curso("Formação Java Junior", "Eduardo Escudero");
 
-        formacaoJavaJunior.add(new Aula("Java Básico", 360));
-        formacaoJavaJunior.add(new Aula("Spring Boot", 240));
-        formacaoJavaJunior.add(new Aula("MySql", 120));
-        formacaoJavaJunior.add(new Aula("Design Patterns", 140));
+        formacaoJavaJunior.adicionarCurso(new Aula("Java Básico", 360));
+        formacaoJavaJunior.adicionarCurso(new Aula("Spring Boot", 240));
+        formacaoJavaJunior.adicionarCurso(new Aula("MySql", 120));
+        formacaoJavaJunior.adicionarCurso(new Aula("Design Patterns", 140));
 
         System.out.println("=== trabalhando com a lista imutável ===");
         List<Aula> aulasImutaveis = formacaoJavaJunior.getAulas();

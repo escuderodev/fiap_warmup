@@ -13,10 +13,10 @@ public class TestaCurso {
         Aula mysql = new Aula("MySql", 120);
         Aula designPatterns = new Aula("Design Patterns", 140);
 
-        formacaoJavaJunior.add(java);
-        formacaoJavaJunior.add(spring);
-        formacaoJavaJunior.add(mysql);
-        formacaoJavaJunior.add(designPatterns);
+        formacaoJavaJunior.adicionarCurso(java);
+        formacaoJavaJunior.adicionarCurso(spring);
+        formacaoJavaJunior.adicionarCurso(mysql);
+        formacaoJavaJunior.adicionarCurso(designPatterns);
 
         System.out.println("\n=== imprimindo dados do curso ===");
         System.out.println(String.format("""

@@ -1,19 +1,17 @@
 package br.com.alura.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Curso {
 
     private String nome;
     private String instrutor;
     private List<Aula> aulas = new ArrayList<>();
+    private Set<Aluno> alunos = new HashSet<>();
 
     public Curso(String nome, String instrutor, List<Aula> aulas) {
         this.nome = nome;
         this.instrutor = instrutor;
-        this.aulas = aulas;
     }
 
     public Curso(String nome, String instrutor) {
@@ -33,8 +31,17 @@ public class Curso {
         return Collections.unmodifiableList(aulas);
     }
 
-    public void add(Aula aula) {
+    public Set<Aluno> getAlunos() {
+        return Collections.unmodifiableSet(alunos);
+    }
+
+    public void adicionarCurso(Aula aula) {
+
         aulas.add(aula);
+    }
+
+    public void matricularAluno(Aluno aluno) {
+        alunos.add(aluno);
     }
 
     public int getTempoTotal() {
@@ -50,8 +57,24 @@ public class Curso {
         return this.aulas.stream().mapToInt(Aula::getTempo).sum();
     }
 
-    @Override
-    public String toString() {
-        return "[Curso: " + nome + ", tempo total: " + this.getTempoTotal() + "]";
+    public void detalhaCurso() {
+        System.out.println("\n=== Descrição do Curso ===");
+        System.out.println(String.format("""
+                Nome: %s
+                Instrutor: %s
+                """, this.nome, this.instrutor));
+
+        System.out.println("=== Aulas do Curso ===");
+        aulas.forEach(System.out::println);
+
+        System.out.println("\n=== Alunos Matriculados ===");
+        alunos.forEach(System.out::println);
+
+        System.out.println("\n=== Duração do Curso ===");
+        int total = 0;
+        for (int i = 0; i < aulas.size(); i++) {
+            total += aulas.get(i).getTempo();
+        }
+        System.out.println(total + " minutos");
     }
 }
