@@ -33,5 +33,13 @@ public class TestandoSets {
         formacaoDev.matricularAluno(valmir);
 
         formacaoDev.detalhaCurso();
+
+        Aluno aluno = alicia;
+        System.out.println("\n=== pesquisando se o(a) aluno(a) " + aluno + " está matriculado(a) ===");
+        System.out.println("Aluno matriculado? " + formacaoDev.verificaMatricula(aluno));
+
+        Aluno lilli = new Aluno("Alícia","99999");
+        System.out.println("O aluno " + lilli.getNome() + " é igual ao aluno " + alicia.getNome());
+        System.out.println(alicia.equals(lilli));
     }
 }

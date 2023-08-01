@@ -77,4 +77,8 @@ public class Curso {
         }
         System.out.println(total + " minutos");
     }
+
+    public boolean verificaMatricula(Aluno aluno) {
+        return this.alunos.contains(aluno);
+    }
 }
